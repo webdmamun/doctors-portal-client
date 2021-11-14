@@ -1,4 +1,12 @@
-import { Fade, Modal, Typography, Box, Backdrop } from "@mui/material";
+import {
+  Fade,
+  Modal,
+  Typography,
+  Box,
+  Backdrop,
+  TextField,
+  Button,
+} from "@mui/material";
 import React from "react";
 
 const style = {
@@ -13,8 +21,16 @@ const style = {
   p: 4,
 };
 
-const BookingModal = ({ openBooking, handleBookingClose, booking }) => {
+const BookingModal = ({ openBooking, handleBookingClose, booking, date }) => {
   const { name, time } = booking;
+
+  const handleBookingSubmit = (e) => {
+    alert("form submitted");
+    // collect data
+    // sent to the server
+    handleBookingClose();
+    e.preventDefault();
+  };
   return (
     <Modal
       aria-labelledby="transition-modal-title"
@@ -29,12 +45,64 @@ const BookingModal = ({ openBooking, handleBookingClose, booking }) => {
     >
       <Fade in={openBooking}>
         <Box sx={style}>
-          <Typography id="transition-modal-title" variant="h6" component="h2">
+          <Typography
+            id="transition-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ textAlign: "center" }}
+          >
             {name}
           </Typography>
-          <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-            {time}
-          </Typography>
+
+          <form onSubmit={handleBookingSubmit}>
+            <TextField
+              disabled
+              label="Time"
+              sx={{ width: "90%", margin: "5px" }}
+              id="outlined-size-small"
+              defaultValue={time}
+              size="small"
+            />
+            <TextField
+              label="Name"
+              sx={{ width: "90%", margin: "5px" }}
+              id="outlined-size-small"
+              size="small"
+            />
+            <TextField
+              label="Phone Number"
+              type="number"
+              sx={{ width: "90%", margin: "5px" }}
+              id="outlined-size-small"
+              size="small"
+            />
+            <TextField
+              label="Email"
+              type="email"
+              sx={{ width: "90%", margin: "5px" }}
+              id="outlined-size-small"
+              size="small"
+            />
+            <TextField
+              disabled
+              label="Date"
+              sx={{ width: "90%", margin: "5px" }}
+              id="outlined-size-small"
+              defaultValue={date}
+              size="small"
+            />
+            <Button
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                margin: "0 auto",
+              }}
+              type="submit"
+              variant="contained"
+            >
+              Submit
+            </Button>
+          </form>
         </Box>
       </Fade>
     </Modal>
