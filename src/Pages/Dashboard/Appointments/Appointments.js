@@ -13,7 +13,9 @@ const Appointments = ({ date }) => {
   const { user, token } = useAuth();
   const [appointments, setAppointments] = useState([]);
   useEffect(() => {
-    const url = `https://agile-bayou-19050.herokuapp.com/appointments?email=${user.email}&date=${date}`;
+    const url = `https://agile-bayou-19050.herokuapp.com/appointments?email=${
+      user.email
+    }&date=${date.toLocaleDateString()}`;
     fetch(url, {
       headers: {
         authorization: `Bearer ${token}`,
