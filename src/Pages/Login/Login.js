@@ -15,7 +15,13 @@ import useAuth from "./../../Hooks/useAuth";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, loginWithEmailPassword, isLoading, authError } = useAuth();
+  const {
+    user,
+    loginWithEmailPassword,
+    sginInWithGoogle,
+    isLoading,
+    authError,
+  } = useAuth();
 
   const location = useLocation();
   const history = useHistory();
@@ -35,6 +41,9 @@ const Login = () => {
       history
     );
     e.preventDefault();
+  };
+  const handleGoogleSignIn = () => {
+    sginInWithGoogle(location, history);
   };
   return (
     <Container>
@@ -110,6 +119,20 @@ const Login = () => {
                 </Button>
               </form>
             )}
+            <Button
+              sx={{ width: "75%", m: 1 }}
+              variant="text"
+              onClick={handleGoogleSignIn}
+              style={{
+                textDecoration: "none",
+                display: "flex",
+                justifyContent: "center",
+                margin: "0 auto",
+                marginBottom: "10px",
+              }}
+            >
+              Sgin in With Google
+            </Button>
             {isLoading && <CircularProgress />}
             {user?.email && (
               <Alert severity="success">Account Log in Succesfully!</Alert>
